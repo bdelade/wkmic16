@@ -20,9 +20,9 @@ private WekaReader wr;
 private ASEvaluation  eval;
 private ASSearch search;
 private AttributeSelection ASfilter;
-
-WekaFilter() throws Exception{
-	wr=new WekaReader();
+private int nbattributes;
+public WekaFilter(WekaReader wekaread) throws Exception{
+	wr=wekaread;
 	ASfilter = new AttributeSelection();
 	 eval=new CfsSubsetEval();
 	 search=new GreedyStepwise();
@@ -33,17 +33,30 @@ WekaFilter() throws Exception{
 	ASfilter.setInputFormat(new Instances(wr.getTrainData()));
 	 
 	filteredtrainData=Filter.useFilter((Instances)wr.getTrainData(), ASfilter);
+	filteredvalidData=Filter.useFilter((Instances)wr.getTrainData(), ASfilter);
+	filteredtestData=Filter.useFilter((Instances)wr.getTrainData(), ASfilter);
+	nbattributes= filteredtrainData.numAttributes()-1;
+	filteredtrainData.setClassIndex(nbattributes);
+	filteredvalidData.setClassIndex(nbattributes);
+	filteredtestData.setClassIndex(nbattributes);
+}
+
+public Instances getFTraindata(){
+	return filteredtrainData;
+}
+
+public Instances getFValiddata(){
+	return filteredvalidData;
+}
+public Instances getFTestdata(){
+	return filteredtestData;
+}
+ 
+public Attribute getAttribute(){
+	return filteredtrainData.attribute(nbattributes);
 	
 }
-public static void main(String[] args) {
-	try {
-		WekaFilter wf=new WekaFilter();
-	} catch (Exception e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	
-}
+
 
 
 }

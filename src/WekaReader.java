@@ -44,7 +44,7 @@ public Instances getValidData() {
 public Instances getTestData() {
 	return testData;
 }
-public int getAttributes() {
+public int getnbAttributes() {
 	return nbattributes;
 }
 public void setTrainData(Instances trainData) {
@@ -56,10 +56,11 @@ public void setValidData(Instances validData) {
 public void setTestData(Instances testData) {
 	this.testData = testData;
 }
-public void setAttributes(int attributes) {
-	this.nbattributes = attributes;
-}
+
+public Attribute getAttribute(){
+	return trainData.attribute(nbattributes);
 	
+}
 	
 	
 	

@@ -1,5 +1,7 @@
 
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 import weka.classifiers.Classifier;
@@ -19,12 +21,12 @@ public class WekaRunner {	//effectue les prediction, les sauvegarde et évalue le
 	FastVector trainPred;//conteneur pour les predictions
 	FastVector validPred;
 	FastVector testPred;
-	static Attribute timeInHospital; //utiliser pour faire une évalutation du score 
-	WekaReader reader;
-	WekaBuilder builder;
+	 static Attribute timeInHospital; //utiliser pour faire une évalutation du score 
+	//WekaReader reader;
+	//WekaBuilder builder;
 	
-	public WekaRunner(){
-		//construction des attributs
+	public WekaRunner(Attribute timeInHospital){
+		this.timeInHospital=timeInHospital;
 	}
 	
 	public static FastVector predict(Classifier model, Instances dataToTrain, Instances dataToPredict) throws Exception {
@@ -48,7 +50,7 @@ public class WekaRunner {	//effectue les prediction, les sauvegarde et évalue le
     	pw.close();
 	}
 	
-	public static double getScore(FastVector predictedValues, Instances trueValues, Attribute timeInHospital) {
+	public static double getScore(FastVector predictedValues, Instances trueValues) {
 		//evalue le score
 		int ind = trueValues.numAttributes() - 1;
 		double nbPositive = 0.;
@@ -81,7 +83,31 @@ public class WekaRunner {	//effectue les prediction, les sauvegarde et évalue le
 		return 1./2. * (nbTruePositive / nbPositive + nbTrueNegative / nbNegative);
 		
 	}
+	
+	
 
+	public static void main(String[] args) throws Exception {
+		WekaReader wr=new WekaReader();
+		WekaFilter wf=new WekaFilter(wr);
+		WekaBuilder wb=new WekaBuilder();
+		
+		wb.setDefaultOption();
+		wb.buildOneClassifiers("RandomForest", wf.getFTraindata());
+		WekaRunner wru= new WekaRunner(wf.getAttribute());	
+		FastVector trainPred = predict(wb.getOneClassifier("RandomForest"),wf.getFTraindata() , wf.getFTraindata());
+		
+		double score = getScore(trainPred, wf.getFTraindata());
+    	System.out.println("Score on the training set : " + score);
+       	FastVector validPred = predict(wb.getOneClassifier("RandomForest"),wf.getFTraindata() , wr.getValidData());
+    	FastVector testPred = predict(wb.getOneClassifier("RandomForest"),wf.getFTraindata() , wr.getTestData());
+    	//FastVector validPred2 = predict(wb.getOneClassifier("RandomForest"),wf.getFTraindata() , wf.getFValiddata());
+    	//FastVector testPred2 = predict(wb.getOneClassifier("RandomForest"),wf.getFTraindata() , wf.getFTestdata());
+    	
+    	
+    	savePredictions(validPred, "valid.predict");
+    	savePredictions(testPred, "test.predict");
+	
+	}
 	
 	
 }
