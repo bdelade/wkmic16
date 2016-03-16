@@ -22,8 +22,8 @@ private WekaReader wr; //reader contenant les instances non filtré
 private ASEvaluation  eval; //permet d'évaluer les attribut afin de guider la recherche		
 private ASSearch search; //permet d'obtenir un rang ou des classe d'attribut
 private AttributeSelection ASfilter;  //filtre d'attribut
-private Filter filter; //filtre general
-private int nbattributes;
+private Filter filter; //filtre generale
+private int nbattributes; //nombre attributs
 public WekaFilter(WekaReader wekaread) throws Exception{
 	//construction et selection attribut
 	wr=wekaread;
@@ -39,7 +39,7 @@ public WekaFilter(WekaReader wekaread) throws Exception{
 	filteredtrainData=Filter.useFilter((Instances)wr.getTrainData(), ASfilter);
 	filteredvalidData=Filter.useFilter((Instances)wr.getTrainData(), ASfilter);
 	filteredtestData=Filter.useFilter((Instances)wr.getTrainData(), ASfilter);
-	nbattributes= filteredtrainData.numAttributes()-1;
+	nbattributes= filteredtrainData.numAttributes()-1;//l'attribut qui nous interesse
 	filteredtrainData.setClassIndex(nbattributes);
 	filteredvalidData.setClassIndex(nbattributes);
 	filteredtestData.setClassIndex(nbattributes);

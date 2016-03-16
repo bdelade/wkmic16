@@ -17,6 +17,7 @@ import weka.core.Attribute;
 import weka.core.FastVector;
 import weka.core.Instances;
 public class WekaBuilder {
+//cette classe contiendra aussi le classifier (arbre) que nous allons implémenter
 HashMap<String,Classifier> models;// plusieurs classifiers afin de pouvoir les faire voter
 //un autre atribut de type option permettant stocker/créer différente option modifiable	
 	

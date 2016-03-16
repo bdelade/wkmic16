@@ -1,6 +1,7 @@
 import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 
 import org.junit.Test;
@@ -35,6 +36,7 @@ public class JunitWeka {
 	
 	}
 	
+	@Test
 	public void testwekaBuilder() throws Exception {
 		WekaReader wr=new WekaReader();
 		WekaFilter wf=new WekaFilter(wr);
@@ -47,6 +49,7 @@ public class JunitWeka {
 		
 
 	}
+	@Test
 	public void testwekaRunner() throws Exception {
 		WekaReader wr=new WekaReader();
 		WekaFilter wf=new WekaFilter(wr);
@@ -61,6 +64,13 @@ public class JunitWeka {
 		double score = wru.getScore(trainPred, wf.getFTraindata());
 		assertNotNull(score); //meme chose
 		
+		FastVector validPred = wru.predict(wb.getOneClassifier("RandomForest"),wf.getFTraindata() , wr.getValidData());
+    	FastVector testPred = wru.predict(wb.getOneClassifier("RandomForest"),wf.getFTraindata() , wr.getTestData());
+    	assertNotNull(validPred);
+    	assertNotNull(validPred);
+		wru.savePredictions(validPred, "valid.predict");// on sauvegarde les predictions
+    	wru.savePredictions(testPred, "test.predict");
+    	
 	}
 	
 
