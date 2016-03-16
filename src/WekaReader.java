@@ -22,12 +22,12 @@ public WekaReader() throws FileNotFoundException, IOException {
 	validPath="dataset/valid_set.arff";
 	testPath="dataset/test_set.arff";
  
-		Instances trainData = new Instances(new FileReader(trainPath));
+		 trainData = new Instances(new FileReader(trainPath));
 		
 
 	
-		Instances validData = new Instances(new FileReader(validPath));
-		Instances testData = new Instances(new FileReader(testPath));	
+		 validData = new Instances(new FileReader(validPath));
+		 testData = new Instances(new FileReader(testPath));	
 		nbattributes=trainData.numAttributes()-1;
 		
 
