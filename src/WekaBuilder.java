@@ -30,11 +30,12 @@ public WekaBuilder(){
 
 	public void addModel(String key,Classifier classif ){
 		
-		models.put(key, classif);
+		models.put(key, classif); //ajout d'un classifier
 		
 	}
 	
 	public void setDefaultOption(){
+		
 		//option par defaut pour les classifiers par défaut
 		((RandomForest) models.get("RandomForest")).setMaxDepth(5);
 			

@@ -13,16 +13,16 @@ import weka.core.FastVector;
 import weka.core.Instances;
 //instance(i) pour parcourir instance
 public class WekaReader {
-private	String trainPath,validPath,testPath;
+private	String trainPath,validPath,testPath;//chemin
 	
-protected Instances trainData, validData, testData;
-private int nbattributes;
+protected Instances trainData, validData, testData; //instances
+private int nbattributes; 
 public WekaReader() throws FileNotFoundException, IOException {
-	trainPath="dataset/train_set.arff";
+	trainPath="dataset/train_set.arff"; //chemin par default vers les différent données
 	validPath="dataset/valid_set.arff";
 	testPath="dataset/test_set.arff";
  
-		 trainData = new Instances(new FileReader(trainPath));
+		 trainData = new Instances(new FileReader(trainPath)); //creation des instances
 		
 
 	
@@ -31,10 +31,12 @@ public WekaReader() throws FileNotFoundException, IOException {
 		nbattributes=trainData.numAttributes()-1;
 		
 
- 	trainData.setClassIndex(nbattributes);
+ 	trainData.setClassIndex(nbattributes); // on parametre l'attribut à predire
 	validData.setClassIndex(nbattributes);
 	testData.setClassIndex(nbattributes);
+
 }
+//getter an setter
 public  Instances getTrainData() {
 	return trainData;
 }

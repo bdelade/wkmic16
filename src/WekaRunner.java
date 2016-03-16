@@ -85,7 +85,7 @@ public class WekaRunner {	//effectue les prediction, les sauvegarde et évalue le
 	}
 	
 	
-
+/*
 	public static void main(String[] args) throws Exception {
 		WekaReader wr=new WekaReader();
 		WekaFilter wf=new WekaFilter(wr);
@@ -96,18 +96,18 @@ public class WekaRunner {	//effectue les prediction, les sauvegarde et évalue le
 		WekaRunner wru= new WekaRunner(wf.getAttribute());	
 		FastVector trainPred = predict(wb.getOneClassifier("RandomForest"),wf.getFTraindata() , wf.getFTraindata());
 		
-		double score = getScore(trainPred, wf.getFTraindata());
+		double score = getScore(trainPred, wf.getFTraindata()); // calcule du score
     	System.out.println("Score on the training set : " + score);
-       	FastVector validPred = predict(wb.getOneClassifier("RandomForest"),wf.getFTraindata() , wr.getValidData());
-    	FastVector testPred = predict(wb.getOneClassifier("RandomForest"),wf.getFTraindata() , wr.getTestData());
-    	//FastVector validPred2 = predict(wb.getOneClassifier("RandomForest"),wf.getFTraindata() , wf.getFValiddata());
-    	//FastVector testPred2 = predict(wb.getOneClassifier("RandomForest"),wf.getFTraindata() , wf.getFTestdata());
+       	//FastVector validPred = predict(wb.getOneClassifier("RandomForest"),wf.getFTraindata() , wr.getValidData());
+    	//FastVector testPred = predict(wb.getOneClassifier("RandomForest"),wf.getFTraindata() , wr.getTestData());
+    	FastVector validPred2 = predict(wb.getOneClassifier("RandomForest"),wf.getFTraindata() , wf.getFValiddata());
+    	FastVector testPred2 = predict(wb.getOneClassifier("RandomForest"),wf.getFTraindata() , wf.getFTestdata());
     	
     	
-    	savePredictions(validPred, "valid.predict");
-    	savePredictions(testPred, "test.predict");
+    	savePredictions(validPred2, "valid.predict");
+    	savePredictions(testPred2, "test.predict");
 	
 	}
 	
-	
+	*/
 }
