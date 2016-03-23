@@ -15,6 +15,7 @@ public class JunitWeka {
 	@Test
 	public void testwekareader() throws Exception {
 		WekaReader wr=new WekaReader();
+		
 		assertNotNull(wr);// on test si l'objet à bien été créé
 		
 		assertNotNull(wr.getAttribute()); //on test que l'objet attribut 
