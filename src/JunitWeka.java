@@ -45,7 +45,7 @@ public class JunitWeka {
 		WekaBuilder wb=new WekaBuilder();
 		assertNotNull(wb);
 		assertNotSame(wb.getOneClassifier("RandomForest"),wb.getOneClassifier("J48"));
-		wb.buildOneClassifiers("RandomForest", wf.getFTraindata());
+		wb.buildOneClassifiers("RandomForest", wr.getTrainData());
 		assertEquals(true,wb.getOneClassifier("RandomForest").getClass().isInstance(RandomForest.class.newInstance()));
 		
 
@@ -53,7 +53,7 @@ public class JunitWeka {
 	@Test
 	public void testwekaRunner() throws Exception {
 		WekaReader wr=new WekaReader();
-			WekaFilter wf=new WekaFilter(wr); //non utiliser car option a determiner pour compatibilité avec bayenet
+			WekaFilter wf=new WekaFilter(wr); 
 			WekaBuilder wb=new WekaBuilder();
 			String[] option={"-do-not-check-capabilities"};
 		

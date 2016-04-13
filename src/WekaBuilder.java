@@ -47,12 +47,12 @@ public WekaBuilder(){
 		
 	}
 	
-	public void setDefaultOption(){
+	public void setRandomForest(){
 		
 		//option par defaut pour les classifiers par défaut
-		((RandomForest) models.get("RandomForest")).setMaxDepth(5);
+		((RandomForest) models.get("RandomForest")).setMaxDepth(4);
 			
-		((RandomForest) models.get("RandomForest")).setNumTrees(25);
+		((RandomForest) models.get("RandomForest")).setNumTrees(24);
 	//même chose(pas les mêmes options) pour les autres classifier par défault
 		
 	}
@@ -101,6 +101,10 @@ public  void buildOneFClassifiers(String keyclassif,Instances traindata,Filter f
 		
 	}
 	public void buildOneClassifiers(String keyclassif,Instances arg){
+		if(keyclassif.equals("RandomForest")){
+			setRandomForest();
+		}
+		
 		//on construit un classifier
 		
 	try {

@@ -26,7 +26,7 @@ private ASSearch search; //permet d'obtenir un rang ou des classe d'attribut
 //private AttributeSelection ASfilter;  //filtre d'attribut
 private Filter m_filter; //filtre generales
 private int m_nbattributes; //nombre attributs
-int[] indicesOfColumnsToUse = {4,6,7,8,12,15,23,44};	// determiner à l'aide de weka
+int[] indicesOfColumnsToUse = {8,12,14,6,13,4,7,15,35,5,41,2,11,17,44};	// determiner à l'aide de weka
 public WekaFilter(WekaReader wekaread) throws Exception{
 	//construction et selection attribut
 	m_wr=wekaread;
@@ -36,10 +36,6 @@ public WekaFilter(WekaReader wekaread) throws Exception{
 	
 /*		
 	m_filter = new weka.filters.unsupervised.attribute.Center();
-
-	//int[] indicesOfColumnsToUse = {4,6,7,8,12,15,23,44};	
-	
-
 	 eval=new CfsSubsetEval(); // evaluation par default
 	 search=new BestFirst(); // search  
 	search=new GreedyStepwise(); // search par défaut  par default
