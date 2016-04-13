@@ -12,7 +12,7 @@ import weka.core.FastVector;
 
 public class JunitWeka {
 
-	@Test
+	//@Test
 	public void testwekareader() throws Exception {
 		WekaReader wr=new WekaReader();
 		
@@ -24,7 +24,7 @@ public class JunitWeka {
 		
 		
 	}
-	@Test
+//	@Test
 	
 	public void testwekaFilter() throws Exception {
 	
@@ -38,7 +38,7 @@ public class JunitWeka {
 	*/
 	}
 	
-	@Test
+	//@Test
 	public void testwekaBuilder() throws Exception {
 		WekaReader wr=new WekaReader();
 		WekaFilter wf=new WekaFilter(wr);
@@ -83,6 +83,7 @@ public class JunitWeka {
 	    	assertNotNull(validPred);
 			wru.savePredictions(validPred, "valid.predict");// on sauvegarde les predictions
 	    	wru.savePredictions(testPred, "test.predict");
+	    	wru.zipPredictions(); //
 	}
 	
 

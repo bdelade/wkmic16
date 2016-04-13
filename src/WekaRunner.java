@@ -1,20 +1,22 @@
 
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
-import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.evaluation.NominalPrediction;
-import weka.classifiers.functions.SMO;
-import weka.classifiers.meta.AdaBoostM1;
-import weka.classifiers.trees.J48;
-import weka.classifiers.trees.RandomForest;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.zip.*;
 import weka.core.Attribute;
 import weka.core.FastVector;
 import weka.core.Instances;
+
 public class WekaRunner {	//effectue les prediction, les sauvegarde et évalue le score
 
 	
@@ -48,6 +50,15 @@ public class WekaRunner {	//effectue les prediction, les sauvegarde et évalue le
 			pw.print(timeInHospital.value((int) val) + "\n");
 		}
     	pw.close();
+	}
+	
+	public static void zipPredictions(){
+		  MyMultipleFileZip mfe = new MyMultipleFileZip();
+	        List<String> files = new ArrayList<String>();
+	        files.add("valid.predict");
+	        files.add("test.predict");
+	    
+	        mfe.zipFiles(files);
 	}
 	
 	public static double getScore(FastVector predictedValues, Instances trueValues) {
