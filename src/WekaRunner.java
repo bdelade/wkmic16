@@ -19,7 +19,7 @@ import weka.core.Instances;
 
 public class WekaRunner {	//effectue les prediction, les sauvegarde et évalue le score
 
-	
+	int m_nb=0;
 	FastVector trainPred;//conteneur pour les predictions
 	FastVector validPred;
 	FastVector testPred;
@@ -61,7 +61,8 @@ public class WekaRunner {	//effectue les prediction, les sauvegarde et évalue le
 	        mfe.zipFiles(files);
 	}
 	
-	public static double getScore(FastVector predictedValues, Instances trueValues) {
+	public  double getScore(FastVector predictedValues, Instances trueValues) {
+		int nb=0;
 		//evalue le score
 		int ind = trueValues.numAttributes() - 1;
 		double nbPositive = 0.;
@@ -79,6 +80,8 @@ public class WekaRunner {	//effectue les prediction, les sauvegarde et évalue le
 			int predictedValue = (int) ((NominalPrediction) predictedValues.elementAt(i)).predicted();
 			int predictedLabel = Integer.parseInt(timeInHospital.value(predictedValue));
 			
+			if(predictedLabel==1){ m_nb=m_nb+1;
+			}
 		
 			if (trueLabel == 1) {
 				nbPositive++;
@@ -93,6 +96,11 @@ public class WekaRunner {	//effectue les prediction, les sauvegarde et évalue le
 		
 		return 1./2. * (nbTruePositive / nbPositive + nbTrueNegative / nbNegative);
 		
+	}
+	
+	
+	public void affichem_nb(){
+		System.out.println("nb plus de 7: " + m_nb);
 	}
 	
 	

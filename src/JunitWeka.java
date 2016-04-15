@@ -84,6 +84,7 @@ public class JunitWeka {
 			wru.savePredictions(validPred, "valid.predict");// on sauvegarde les predictions
 	    	wru.savePredictions(testPred, "test.predict");
 	    	wru.zipPredictions(); //
+	    	wru.affichem_nb();
 	}
 	
 
