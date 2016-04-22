@@ -26,8 +26,9 @@ private ASSearch search; //permet d'obtenir un rang ou des classe d'attribut
 //private AttributeSelection ASfilter;  //filtre d'attribut
 private Filter m_filter; //filtre generales
 private int m_nbattributes; //nombre attributs
-//44,14,13,16,15,17,43,20,19,18,12,11,10,3,2,9,4,5,6,7,8,21,22,23,
-int[] indicesOfColumnsToUse = {44,14,13,16,15,17,43,20,19,18,12,11,10,3,2,9,4,5,6,7,8,21,22,23,37,36,34,38,39,40,41,42,35,33,24,26,25,32,27,28,29,30,44}; // determiner à l'aide de weka
+//14,13,16,15,17,43,20,19,18,12,11,10,3,2,9,4,5,6,7,8,21,22,23,
+//14,13,16,15,17,43,20,19,18,12,11,10,3,2,9,4,5,6,7,8,21,22,23,
+int[] indicesOfColumnsToUse = {14,13,16,15,17,43,20,19,18,12,11,10,3,2,9,4,5,6,44}; // determiner à l'aide de weka
 public WekaFilter(WekaReader wekaread) throws Exception{
 	for(int i=0;i<indicesOfColumnsToUse.length-1;i++){
 		indicesOfColumnsToUse[i]=indicesOfColumnsToUse[i]-1;  //on décremente les élément

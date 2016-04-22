@@ -15,7 +15,10 @@ import weka.classifiers.functions.SMO;
 import weka.classifiers.meta.AdaBoostM1;
 import weka.classifiers.meta.ClassificationViaClustering;
 import weka.classifiers.meta.FilteredClassifier;
+import weka.classifiers.meta.Vote;
+import weka.classifiers.trees.BFTree;
 import weka.classifiers.trees.J48;
+import weka.classifiers.trees.REPTree;
 import weka.classifiers.trees.RandomForest;
 import weka.core.Attribute;
 import weka.core.FastVector;
@@ -30,13 +33,14 @@ public WekaBuilder(){
 	models=new HashMap<String,Classifier>();
 	models.put("RandomForest", new RandomForest());// un des classifier par défaut
 	models.put("J48", new J48()); //même chose
+	models.put("BFTree", new BFTree()); //même chose
 	
 	models.put("BayesNet", new BayesNet());
 	models.put("NBayes", new NaiveBayes());
 	models.put("NBayesS", new NaiveBayesSimple());
 	models.put("CVC", new ClassificationViaClustering());
 	models.put("AdaBoostM1", new AdaBoostM1());
-	
+	models.put("REPTree",new REPTree()); 
 	models.put("FC",new FilteredClassifier()); 
 
 } 
@@ -47,12 +51,23 @@ public WekaBuilder(){
 		
 	}
 	
-	public void setRandomForest(){
+	public void setTreeOption(String key) {
 		
 		//option par defaut pour les classifiers par défaut
-		((RandomForest) models.get("RandomForest")).setMaxDepth(4);
-			
-		((RandomForest) models.get("RandomForest")).setNumTrees(24);
+		((RandomForest) models.get(key)).setMaxDepth(4);
+		/* String[] options = new String[4];
+		 options[0] = "-depth";
+		 options[1] = "4";
+		 options[2] = "-I";
+		 options[3] = "23";
+		 try {
+			models.get(key).setOptions(options);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		((RandomForest) models.get(key)).setNumTrees(10);
+		
 	//même chose(pas les mêmes options) pour les autres classifier par défault
 		
 	}
@@ -74,6 +89,13 @@ public WekaBuilder(){
 
 
 public  void buildOneFClassifiers(String keyclassif,Instances traindata,Filter filt){
+	
+	
+if(models.get(keyclassif).getClass().getPackage().getName().equals("weka.classifiers.trees")){
+	System.out.println("trees");
+	setTreeOption(keyclassif);
+}
+
 	((FilteredClassifier) models.get("FC")).setFilter(filt);
 	((FilteredClassifier) models.get("FC")).setClassifier( models.get(keyclassif));
 	try {
@@ -101,10 +123,11 @@ public  void buildOneFClassifiers(String keyclassif,Instances traindata,Filter f
 		
 	}
 	public void buildOneClassifiers(String keyclassif,Instances arg){
-		if(keyclassif.equals("RandomForest")){
-			setRandomForest();
-		}
 		
+		if((models.get(keyclassif).getClass().getPackage().getName()=="weka.classifiers.trees")){
+			setTreeOption(keyclassif);
+		}
+			
 		//on construit un classifier
 		
 	try {
